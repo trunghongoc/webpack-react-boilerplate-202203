@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-import HelloWorld from './components/hello-world'
+import HelloWorld from './components/helloWorld'
 
 class App extends Component {
   constructor(props: any) {

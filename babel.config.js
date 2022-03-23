@@ -14,7 +14,12 @@ module.exports = function babelConfig(api) {
       }
     ],
     '@babel/preset-typescript',
-    '@babel/preset-react'
+    [
+      '@babel/preset-react',
+      {
+        runtime: 'automatic'
+      }
+    ]
   ]
   const plugins = [
     '@babel/transform-react-constant-elements',
