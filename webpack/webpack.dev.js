@@ -17,27 +17,34 @@ module.exports = {
         options: {
           presets: ['@babel/preset-typescript', '@babel/react'],
           plugins: [
-            ['import', { libraryName: 'antd', style: true }],
+            // ['import', { libraryName: 'antd', style: true }],
             require.resolve('react-refresh/babel')
           ].filter(Boolean)
         }
       },
       {
         test: /\.(css|scss)$/,
+        include: /\.module\.(css|scss)$/,
         use: [
-          'style-loader',
+          { loader: 'style-loader' }, // to inject the result into the DOM as a style block
           {
             loader: 'css-loader',
             options: {
+              importLoaders: 1,
               sourceMap: true,
               localsConvention: 'camelCase',
               modules: {
-                localIdentName: '[local]___[hash:base64:5]'
+                localIdentName: '[local]_[hash:base64:5]'
               }
             }
           },
-          'sass-loader'
+          { loader: 'sass-loader' } // to convert SASS to CSS
         ]
+      },
+      {
+        test: /\.(css|scss)$/,
+        exclude: /\.module\.(css|scss)$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },

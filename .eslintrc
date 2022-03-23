@@ -4,6 +4,7 @@
   "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
   "globals": {
     "React": true,
+    "JSX": true,
     "document": true,
     "window": true,
     "jQuery": true,
@@ -46,7 +47,10 @@
     "react/jsx-boolean-value": ["warn", "never"],
     "react/jsx-closing-bracket-location": ["warn", "after-props"],
     "react/jsx-curly-spacing": ["warn", "never"],
-    "react/jsx-filename-extension": ["warn", { "extensions": [".jsx"] }],
+    "react/jsx-filename-extension": [
+      "warn",
+      { "extensions": [".jsx", ".tsx"] }
+    ],
     "react/jsx-first-prop-new-line": ["warn", "multiline"],
     "react/jsx-handler-names": [
       "warn",
@@ -72,5 +76,6 @@
     "jest": true,
     "browser": true,
     "node": true
-  }
+  },
+  "ignorePatterns": ["/**/*.d.ts"]
 }

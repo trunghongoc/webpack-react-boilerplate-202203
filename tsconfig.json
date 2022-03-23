@@ -41,6 +41,6 @@
     "jest",
     "src/setupTests.ts"
   ],
-  "include": ["src"],
+  "include": ["src", "declaration.d.ts"],
   "compileOnSave": true
 }

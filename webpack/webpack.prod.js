@@ -55,24 +55,62 @@ module.exports = {
         exclude: /(node_modules)/,
         options: {
           presets: ['@babel/preset-typescript', '@babel/react'],
-          plugins: [['import', { libraryName: 'antd', style: true }]]
+          plugins: [
+            // ['import', { libraryName: 'antd', style: true }]
+          ]
         }
+      },
+      // {
+      //   test: /\.(css|scss)$/,
+      //   use: [
+      //     MiniCssExtractPlugin.loader,
+      //     {
+      //       loader: 'css-loader',
+      //       options: {
+      //         sourceMap: false,
+      //         localsConvention: 'camelCase',
+      //         importLoaders: 1,
+      //         modules: {
+      //           localIdentName: '[local]___[hash:base64:5]'
+      //         }
+      //       }
+      //     },
+      //     'sass-loader'
+      //   ]
+      // }
+
+      {
+        test: /\.(css|scss)$/,
+        include: /\.module\.(css|scss)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          // 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              localsConvention: 'camelCase',
+              modules: {
+                localIdentName: '[hash:base64:5]'
+              }
+            }
+          },
+          'sass-loader' // to convert SASS to CSS
+        ]
       },
       {
         test: /\.(css|scss)$/,
+        exclude: /\.module\.(css|scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              sourceMap: false,
-              localsConvention: 'camelCase',
-              modules: {
-                localIdentName: '[local]___[hash:base64:5]'
-              }
+              sourceMap: true,
+              localsConvention: 'camelCase'
             }
           },
-          'sass-loader'
+          'sass-loader' // to convert SASS to CSS
         ]
       }
     ]
