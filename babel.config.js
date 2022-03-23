@@ -35,6 +35,7 @@ module.exports = function babelConfig(api) {
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     '@babel/plugin-proposal-json-strings',
 
+    // disable babel warning
     ['@babel/plugin-proposal-private-methods', { loose: true }],
     ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
   ]
