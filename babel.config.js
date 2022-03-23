@@ -9,7 +9,7 @@ module.exports = function babelConfig(api) {
         targets: {
           esmodules: true
         },
-        corejs: '3.21.1',
+        corejs: '3.19.2',
         useBuiltIns: 'usage'
       }
     ],
