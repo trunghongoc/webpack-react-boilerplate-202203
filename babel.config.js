@@ -9,7 +9,7 @@ module.exports = function babelConfig(api) {
         targets: {
           esmodules: true
         },
-        corejs: '3.0.0',
+        corejs: '3.21.1',
         useBuiltIns: 'usage'
       }
     ],
@@ -33,7 +33,10 @@ module.exports = function babelConfig(api) {
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-syntax-import-meta',
     ['@babel/plugin-proposal-class-properties', { loose: true }],
-    '@babel/plugin-proposal-json-strings'
+    '@babel/plugin-proposal-json-strings',
+
+    ['@babel/plugin-proposal-private-methods', { loose: true }],
+    ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
   ]
 
   if (babelEnv === 'production') {
