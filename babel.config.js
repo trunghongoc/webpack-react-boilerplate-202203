@@ -1,20 +1,21 @@
 module.exports = function babelConfig(api) {
-  const babelEnv = api.env();
-  api.cache(true);
+  const babelEnv = api.env()
+  api.cache(true)
 
   const presets = [
     [
       '@babel/preset-env',
       {
         targets: {
-          esmodules: true,
+          esmodules: true
         },
         corejs: '3.0.0',
-        useBuiltIns: 'usage',
-      },
+        useBuiltIns: 'usage'
+      }
     ],
-    '@babel/preset-react',
-  ];
+    '@babel/preset-typescript',
+    '@babel/preset-react'
+  ]
   const plugins = [
     '@babel/transform-react-constant-elements',
     'transform-react-remove-prop-types',
@@ -32,15 +33,15 @@ module.exports = function babelConfig(api) {
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-syntax-import-meta',
     ['@babel/plugin-proposal-class-properties', { loose: true }],
-    '@babel/plugin-proposal-json-strings',
-  ];
+    '@babel/plugin-proposal-json-strings'
+  ]
 
   if (babelEnv === 'production') {
-    plugins.push(['@babel/plugin-transform-react-inline-elements']);
+    plugins.push(['@babel/plugin-transform-react-inline-elements'])
   }
 
   return {
     presets,
-    plugins,
-  };
-};
+    plugins
+  }
+}

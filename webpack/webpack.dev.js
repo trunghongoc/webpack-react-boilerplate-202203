@@ -1,26 +1,26 @@
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const commonPaths = require('./paths');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const commonPaths = require('./paths')
 
 module.exports = {
   mode: 'development',
   output: {
     filename: '[name].js',
     path: commonPaths.outputPath,
-    chunkFilename: '[name].js',
+    chunkFilename: '[name].js'
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         loader: 'babel-loader',
         exclude: /(node_modules)/,
         options: {
-          presets: ['@babel/react'],
+          presets: ['@babel/preset-typescript', '@babel/react'],
           plugins: [
             ['import', { libraryName: 'antd', style: true }],
-            require.resolve('react-refresh/babel'),
-          ].filter(Boolean),
-        },
+            require.resolve('react-refresh/babel')
+          ].filter(Boolean)
+        }
       },
       {
         test: /\.(css|scss)$/,
@@ -32,19 +32,19 @@ module.exports = {
               sourceMap: true,
               localsConvention: 'camelCase',
               modules: {
-                localIdentName: '[local]___[hash:base64:5]',
-              },
-            },
+                localIdentName: '[local]___[hash:base64:5]'
+              }
+            }
           },
-          'sass-loader',
-        ],
-      },
-    ],
+          'sass-loader'
+        ]
+      }
+    ]
   },
   devServer: {
     contentBase: commonPaths.outputPath,
     compress: true,
-    hot: true,
+    hot: true
   },
-  plugins: [new ReactRefreshWebpackPlugin()],
-};
+  plugins: [new ReactRefreshWebpackPlugin()]
+}

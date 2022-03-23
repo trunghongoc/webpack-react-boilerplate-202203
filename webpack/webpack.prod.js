@@ -1,16 +1,16 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
-const commonPaths = require('./paths');
+const commonPaths = require('./paths')
 
 module.exports = {
   mode: 'production',
   output: {
     filename: `${commonPaths.jsFolder}/[name].[hash].js`,
     path: commonPaths.outputPath,
-    chunkFilename: `${commonPaths.jsFolder}/[name].[chunkhash].js`,
+    chunkFilename: `${commonPaths.jsFolder}/[name].[chunkhash].js`
   },
   optimization: {
     minimizer: [
@@ -20,9 +20,9 @@ module.exports = {
         parallel: true,
         // Enable file caching
         cache: true,
-        sourceMap: true,
+        sourceMap: true
       }),
-      new OptimizeCSSAssetsPlugin(),
+      new OptimizeCSSAssetsPlugin()
     ],
     // Automatically split vendor and commons
     // https://twitter.com/wSokra/status/969633336732905474
@@ -32,31 +32,31 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'initial',
+          chunks: 'initial'
         },
         async: {
           test: /[\\/]node_modules[\\/]/,
           name: 'async',
           chunks: 'async',
-          minChunks: 4,
-        },
-      },
+          minChunks: 4
+        }
+      }
     },
     // Keep the runtime chunk seperated to enable long term caching
     // https://twitter.com/wSokra/status/969679223278505985
-    runtimeChunk: true,
+    runtimeChunk: true
   },
 
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         loader: 'babel-loader',
         exclude: /(node_modules)/,
         options: {
-          presets: ['@babel/react'],
-          plugins: [['import', { libraryName: 'antd', style: true }]],
-        },
+          presets: ['@babel/preset-typescript', '@babel/react'],
+          plugins: [['import', { libraryName: 'antd', style: true }]]
+        }
       },
       {
         test: /\.(css|scss)$/,
@@ -68,21 +68,21 @@ module.exports = {
               sourceMap: false,
               localsConvention: 'camelCase',
               modules: {
-                localIdentName: '[local]___[hash:base64:5]',
-              },
-            },
+                localIdentName: '[local]___[hash:base64:5]'
+              }
+            }
           },
-          'sass-loader',
-        ],
-      },
-    ],
+          'sass-loader'
+        ]
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: `${commonPaths.cssFolder}/[name].css`,
-      chunkFilename: `${commonPaths.cssFolder}/[name].css`,
-    }),
+      chunkFilename: `${commonPaths.cssFolder}/[name].css`
+    })
   ],
-  devtool: 'source-map',
-};
+  devtool: 'source-map'
+}
